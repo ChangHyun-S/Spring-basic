@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 // 자바 코드로 직접 스프링 빈 등록
+// 직접 등록하거나 new 생성하면 AutoWired 적용 안됨
 @Configuration
 public class SpringConfig {
 

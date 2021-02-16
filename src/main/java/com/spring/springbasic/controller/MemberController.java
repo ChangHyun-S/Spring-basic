@@ -4,8 +4,11 @@ import com.spring.springbasic.domain.Member;
 import com.spring.springbasic.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class MemberController {
@@ -24,11 +27,20 @@ public class MemberController {
     @PostMapping("/members/new")
     public String Create(MemberForm form) {
         Member member = new Member();
+        // set으로 저장된거 get으로 꺼내옴
         member.setName(form.getName());
 
         memberService.join(member);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/members")
+    public String list(Model model) {
+        // 모두 긁어옴
+        List<Member> members =memberService.findMembers();
+        model.addAttribute("members", members);
+        return "members/memberList";
     }
 
 }
